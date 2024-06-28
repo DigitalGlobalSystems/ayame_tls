@@ -20,8 +20,6 @@ const (
 
 	defaultListenPrometheusIPv4Address = "0.0.0.0"
 	defaultListenPrometheusPortNumber  = 4000
-
-	defaultUseTls = false
 )
 
 type Config struct {
@@ -104,10 +102,6 @@ func setDefaultsConfig(config *Config) {
 
 	if config.ListenPrometheusPortNumber == 0 {
 		config.ListenPrometheusPortNumber = defaultListenPrometheusPortNumber
-	}
-
-	if config.UseTls == "" {
-		config.UseTls = defaultUseTls
 	}
 
 	zlog.Info().Bool("debug", config.Debug).Msg("AyameConf")
