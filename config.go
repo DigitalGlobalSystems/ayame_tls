@@ -119,5 +119,5 @@ func setDefaultsConfig(config *Config) {
 	zlog.Info().Int32("prometheus_port", config.ListenPrometheusPortNumber).Msg("AyameConf")
 	zlog.Info().Bool("use_tls", config.UseTls).Msg("AyameConf")
 	zlog.Info().Str("cert_file", config.CertFile).Msg("AyameConf")
-	zlog.Info().Str("key_file", conf.KeyFile).Msg("AyameConf")
+	zlog.Info().Str("key_file", config.KeyFile).Msg("AyameConf")
 }
