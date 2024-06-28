@@ -75,7 +75,14 @@ func (s *Server) Start(ctx context.Context) error {
 	ch := make(chan error)
 	go func() {
 		defer close(ch)
-		if err := s.ListenAndServe(); err != nil {
+
+		if s.config.UseTls {
+			err := s.ListenAndServeTLS(s.config.CertFile, s.config.KeyFile)
+		} else {
+			err := s.ListenAndServe()
+		}
+
+		if err != nil {
 			ch <- err
 		}
 	}()

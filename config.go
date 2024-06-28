@@ -20,6 +20,8 @@ const (
 
 	defaultListenPrometheusIPv4Address = "0.0.0.0"
 	defaultListenPrometheusPortNumber  = 4000
+
+	defaultUseTls = false
 )
 
 type Config struct {
@@ -40,6 +42,10 @@ type Config struct {
 
 	ListenPrometheusIPv4Address string `ini:"listen_prometheus_ipv4_address"`
 	ListenPrometheusPortNumber  int32  `ini:"listen_prometheus_port_number"`
+
+	UseTls   bool   `ini:"use_tls"`
+	CertFile string `ini:"cert_file"`
+	KeyFile  string `ini:"key_file"`
 }
 
 func NewConfig(configFilePath string) (*Config, error) {
@@ -100,6 +106,10 @@ func setDefaultsConfig(config *Config) {
 		config.ListenPrometheusPortNumber = defaultListenPrometheusPortNumber
 	}
 
+	if config.UseTls == "" {
+		config.UseTls = defaultUseTls
+	}
+
 	zlog.Info().Bool("debug", config.Debug).Msg("AyameConf")
 	zlog.Info().Str("log_dir", config.LogDir).Msg("AyameConf")
 	zlog.Info().Str("log_name", config.LogName).Msg("AyameConf")
@@ -113,4 +123,7 @@ func setDefaultsConfig(config *Config) {
 	zlog.Info().Int32("webhook_request_timeout_sec", config.WebhookRequestTimeoutSec)
 	zlog.Info().Str("prometheus_ipv4_address", config.ListenPrometheusIPv4Address).Msg("AyameConf")
 	zlog.Info().Int32("prometheus_port", config.ListenPrometheusPortNumber).Msg("AyameConf")
+	zlog.Info().Bool("use_tls", config.UseTls).Msg("AyameConf")
+	zlog.Info().Str("cert_file", config.CertFile).Msg("AyameConf")
+	zlog.Info().Str("key_file", conf.KeyFile).Msg("AyameConf")
 }
